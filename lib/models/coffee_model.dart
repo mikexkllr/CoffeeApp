@@ -2,12 +2,13 @@ import 'package:coffee_app/models/coffee_type.dart';
 
 class CoffeeTypeModel {
   String title;
-  bool isSelected;
   CoffeeType type;
 
   // this is a constructor lol
-  CoffeeTypeModel(
-      {required this.title, required this.isSelected, required this.type});
+  CoffeeTypeModel({
+    required this.title,
+    required this.type,
+  });
 }
 
 class Coffee {

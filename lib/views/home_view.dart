@@ -15,7 +15,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int selectedCoffeeType = 0;
+  CoffeeType selectedCoffeeType = CoffeeType.all;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +65,7 @@ class _HomeViewState extends State<HomeView> {
           ),
 
           Container(
+            padding: EdgeInsets.symmetric(vertical: 15.0),
             height: 50,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -72,9 +73,10 @@ class _HomeViewState extends State<HomeView> {
               itemBuilder: (context, index) {
                 return CoffeeScrollItem(
                   title: coffeeTypeList[index].title,
-                  isSelected: coffeeTypeList[index].isSelected,
+                  isSelected:
+                      this.selectedCoffeeType == coffeeTypeList[index].type,
                   onTapCallback: () {
-                    selectCoffeeType(index);
+                    selectCoffeeType(coffeeTypeList[index].type);
                   },
                 );
               },
@@ -87,7 +89,12 @@ class _HomeViewState extends State<HomeView> {
               scrollDirection: Axis.horizontal,
               itemCount: coffeeList.length,
               itemBuilder: (context, index) {
-                return CoffeeTile(coffee: coffeeList[index]);
+                if (selectedCoffeeType == CoffeeType.all ||
+                    selectedCoffeeType == coffeeList[index].type) {
+                  return CoffeeTile(coffee: coffeeList[index]);
+                }
+
+                return Container();
               },
             ),
           )
@@ -103,12 +110,9 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  selectCoffeeType(int index) {
+  selectCoffeeType(CoffeeType coffeeType) {
     setState(() {
-      for (int i = 0; i < coffeeTypeList.length; i++) {
-        coffeeTypeList[i].isSelected = false;
-      }
-      coffeeTypeList[index].isSelected = !coffeeTypeList[index].isSelected;
+      this.selectedCoffeeType = coffeeType;
     });
   }
 }
