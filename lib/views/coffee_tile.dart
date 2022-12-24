@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../models/coffee_model.dart';
+
 class CoffeeTile extends StatelessWidget {
-  const CoffeeTile(
-      {super.key,
-      this.title = "Latte",
-      this.subtitle = "With Almond Milk",
-      this.price = "€4.00",
-      this.imagePath = "lib/assets/images/coffee1.jpg"});
-  final String title;
-  final String subtitle;
-  final String price;
-  final String imagePath;
+  const CoffeeTile({
+    super.key,
+    required this.coffee,
+  });
+  final Coffee coffee;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +27,16 @@ class CoffeeTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(this.imagePath),
+            Container(
+              height: 200,
+              width: double.maxFinite,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: FittedBox(
+                  child: Image.asset(coffee.imagePath),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
 
             // coffee name
@@ -43,14 +47,14 @@ class CoffeeTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    this.title,
+                    coffee.title,
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
                     height: 4,
                   ),
                   Text(
-                    this.subtitle,
+                    coffee.subtitle,
                     style: TextStyle(color: Colors.grey[800]),
                   )
                 ],
@@ -64,7 +68,7 @@ class CoffeeTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(this.price),
+                  Text("€ ${coffee.price.toString()}"),
                   Container(
                     decoration: BoxDecoration(
                         color: Colors.brown,

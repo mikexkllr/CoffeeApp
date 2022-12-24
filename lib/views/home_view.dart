@@ -5,6 +5,7 @@ import 'package:coffee_app/views/coffee_scroll_item.dart';
 import 'package:coffee_app/views/coffee_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:coffee_app/models/mock_data.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,29 +16,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int selectedCoffeeType = 0;
-
-  List coffeeList = [
-    {
-      "title": "Cappuccino",
-      "type": CoffeeType.cappuccino,
-      "isSelected": true,
-    },
-    {
-      "title": "Latte",
-      "type": CoffeeType.latte,
-      "isSelected": false,
-    },
-    {
-      "title": "Black",
-      "type": CoffeeType.black,
-      "isSelected": false,
-    },
-    {
-      "title": "Tea",
-      "type": CoffeeType.tea,
-      "isSelected": false,
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +68,11 @@ class _HomeViewState extends State<HomeView> {
             height: 50,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: this.coffeeList.length,
+              itemCount: coffeeTypeList.length,
               itemBuilder: (context, index) {
                 return CoffeeScrollItem(
-                  title: this.coffeeList[index]["title"],
-                  isSelected: this.coffeeList[index]["isSelected"],
+                  title: coffeeTypeList[index].title,
+                  isSelected: coffeeTypeList[index].isSelected,
                   onTapCallback: () {
                     selectCoffeeType(index);
                   },
@@ -105,15 +83,12 @@ class _HomeViewState extends State<HomeView> {
 
           // horizontal list view of coffee tiles
           Expanded(
-            child: ListView(
+            child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              children: [
-                CoffeeTile(),
-                CoffeeTile(),
-                CoffeeTile(),
-                CoffeeTile(),
-                CoffeeTile(),
-              ],
+              itemCount: coffeeList.length,
+              itemBuilder: (context, index) {
+                return CoffeeTile(coffee: coffeeList[index]);
+              },
             ),
           )
         ],
@@ -130,11 +105,10 @@ class _HomeViewState extends State<HomeView> {
 
   selectCoffeeType(int index) {
     setState(() {
-      for (int i = 0; i < coffeeList.length; i++) {
-        coffeeList[i]["isSelected"] = false;
+      for (int i = 0; i < coffeeTypeList.length; i++) {
+        coffeeTypeList[i].isSelected = false;
       }
-      this.coffeeList[index]["isSelected"] =
-          !this.coffeeList[index]["isSelected"];
+      coffeeTypeList[index].isSelected = !coffeeTypeList[index].isSelected;
     });
   }
 }
