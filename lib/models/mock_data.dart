@@ -10,7 +10,7 @@ List coffeeTypeList = [
   CoffeeTypeModel(title: "Tea", type: CoffeeType.tea)
 ];
 
-List coffeeList = [
+List<Coffee> coffeeListMock = [
   Coffee(
     title: "Cappuccino",
     subtitle: "With Almond Milk",

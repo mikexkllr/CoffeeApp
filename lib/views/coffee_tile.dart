@@ -1,3 +1,4 @@
+import 'package:coffee_app/generics/coffee_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../models/coffee_model.dart';
@@ -14,15 +15,15 @@ class CoffeeTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(
         left: 10.0,
-        bottom: 25.0,
+        bottom: 15.0,
         top: 10.0,
       ),
       child: Container(
         padding: EdgeInsets.all(8.0),
-        width: 200,
+        width: 210,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Colors.black54,
+          color: Colors.grey[900],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +72,7 @@ class CoffeeTile extends StatelessWidget {
                   Text("€ ${coffee.price.toString()}"),
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.brown,
+                        color: CoffeeColors.orange,
                         borderRadius: BorderRadius.circular(6)),
                     child: Icon(Icons.add),
                   )

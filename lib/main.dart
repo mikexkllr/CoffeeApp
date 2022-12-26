@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:coffee_app/views/home_view.dart';
+import 'package:coffee_app/generics/coffee_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomeView(),
-      theme: ThemeData(
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.brown,
+        useMaterial3: true,
+        scaffoldBackgroundColor: Colors.black,
       ),
     );
   }
